@@ -22,7 +22,7 @@ namespace _20181005_opendata
             List<OpenData> result = new List<OpenData>();
             var xml = XElement.Load(@"https://apiservice.mol.gov.tw/OdService/download/A17000000J-020047-jb6");
             var nodes = xml.Descendants("row").ToList();
-
+            /*
             for (var i = 0; i < nodes.Count; i++)
             {
                 var node = nodes[i];
@@ -35,6 +35,19 @@ namespace _20181005_opendata
 
                 result.Add(item);
             }
+            */
+            //1012
+            nodes.ToList()
+              .ForEach(node =>
+              {
+                  OpenData item = new OpenData();
+                  item.工會名稱 = getValue(node, "工會名稱");
+                  item.地址 = getValue(node, "地址");
+                  item.電話 = getValue(node, "電話");
+                  item.傳真 = getValue(node, "傳真");
+                  result.Add(item);
+              });
+
             return result;
         }
 
